@@ -1,56 +1,80 @@
 import './App.css';
 import Job from './Job.jsx'
 import User from './User.jsx'
+import Planet from './Planet.jsx'
 
 function App() {
   // const names = ["Pedro", "Jake", "Jessica", "Mike", "Dustin", "Reudy"];
-  const users = [
-    { name: "Pedro", age: 21},
-    { name: "Jake", age: 25},
-    { name: "Jessica", age: 34}
+  const planets = [
+    { name: "Mars", isGasPlanet: false },
+    { name: "Earth", isGasPlanet: false },
+    { name: "Jupiter", isGasPlanet: true },
+    { name: "Venus", isGasPlanet: false },
+    { name: "Neptune", isGasPlanet: true },
+    { name: "Uranus", isGasPlanet: true }
   ];
 
   return (
     <div className="App">
-      {users.map((user, key) => {
+      {planets.map((planet, key) => {
         return (
-          <User name={user.name} age={user.age} />
-      );
+          planet.isGasPlanet && <Planet name={planet.name} />
+        );
       })}
     </div>
   );
+
+
 }
 
-// Things that I've removed from the return in App Function from past lessons
+  // Things that I've removed from the return in App Function from past lessons
+
+
+  // const users = [
+  //   { name: "Pedro", age: 21},
+  //   { name: "Jake", age: 25},
+  //   { name: "Jessica", age: 34}
+  // ];
+
+  // return (
+  //   <div className="App">
+  //     {users.map((user, key) => {
+  //       return (
+  //         <User name={user.name} {user.age}/>
+  //     );
+  //     })}
+  //   </div>
+  // );
 
 
 
-    // <div className="App">
-    //   <Job salary={90000} position="Senior SDE" company="Amazon" />
-    //   <Job salary={12000} position="Junior SDE" company="Google" />
-    //   <Job salary={10000} position="Project Manager" company="Netflix" />
-    // </div>
+
+  // <div className="App">
+  //   <Job salary={90000} position="Senior SDE" company="Amazon" />
+  //   <Job salary={12000} position="Junior SDE" company="Google" />
+  //   <Job salary={10000} position="Project Manager" company="Netflix" />
+  // </div>
 
 
 
 
-    // const age = 17;
-    // const isGreen = true;
+  // const age = 17;
+  // const isGreen = true;
 
-    // <div className="App">
-    //   {age >= 18 ? <h1>Over age</h1> : <h1>Under Age</h1>}
-    //   <h1 style={{ color: isGreen ? "green" : "red" }}> THIS HAS COLOR </h1>
-    // </div>
+  // <div className="App">
+  //   {age >= 18 ? <h1>Over age</h1> : <h1>Under Age</h1>}
+  //   <h1 style={{ color: isGreen ? "green" : "red" }}> THIS HAS COLOR </h1>
+  // </div>
 
 
-// const User = (props) => {
-//   return (
-//     <div>
-//       <h1>{props.name}</h1>
-//       <h2>{props.age}</h2>
-//       <h2>{props.email}</h2>
-//     </div>
-//   );
-// }
+  // const User = (props) => {
+  //   return (
+  //     <div>
+  //       <h1>{props.name}</h1>
+  //       <h2>{props.age}</h2>
+  //       <h2>{props.email}</h2>
+  //     </div>
+  //   );
+  // }
 
-export default App;
+  export default App;
