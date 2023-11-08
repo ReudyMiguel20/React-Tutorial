@@ -1,26 +1,31 @@
 /* eslint-disable react/jsx-key */
 import "./App.css";
 import { Home } from "./pages/Home";
-import { Menu } from "./pages/Menu";
+import { Profile } from "./pages/Profile.js";
 import { Contact } from "./pages/Contact";
 import { Error } from "./pages/Error";
 import Navbar from "./Navbar.jsx";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState, useEffect, createContext } from "react";
 
-import { useState, useEffect } from "react";
+export const AppContext = createContext();
 
 function App() {
+  const [username, setUsername] = useState("Pedro");
+
   return (
     <div className="App">
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="*" element={<Error />} />
-        </Routes>
-      </Router>
+      <AppContext.Provider value={{ username, setUsername }}>
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="*" element={<Error />} />
+          </Routes>
+        </Router>
+      </AppContext.Provider>
     </div>
   );
 }
