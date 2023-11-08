@@ -5,15 +5,15 @@ import Planet from './Planet.jsx'
 import { useState } from "react";
 
 function App() {
-  const [showText, setShowText] = useState(true);
+  const [textColor, setTextColor] = useState("black");
 
   return (
     <div className="App">
       <button 
       onClick={() => {
-        setShowText(!showText);
+        setTextColor(textColor === "black" ? "red" : "black")
       }}>Show/Hide</button>
-      {showText && <h1>HI MY NAME IS REUDY</h1>}
+      {<h1 style={{ color: textColor }}>HI MY NAME IS REUDY</h1>}
     </div>
   );
 }
