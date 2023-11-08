@@ -2,32 +2,53 @@ import './App.css';
 import Job from './Job.jsx'
 import User from './User.jsx'
 import Planet from './Planet.jsx'
+import { useState } from "react";
 
 function App() {
-  // const names = ["Pedro", "Jake", "Jessica", "Mike", "Dustin", "Reudy"];
-  const planets = [
-    { name: "Mars", isGasPlanet: false },
-    { name: "Earth", isGasPlanet: false },
-    { name: "Jupiter", isGasPlanet: true },
-    { name: "Venus", isGasPlanet: false },
-    { name: "Neptune", isGasPlanet: true },
-    { name: "Uranus", isGasPlanet: true }
-  ];
+const [age, setAge] = useState(0);
+
+const increaseAge = () => {
+  setAge(age + 1);
+};
 
   return (
     <div className="App">
-      {planets.map((planet, key) => {
-        return (
-          planet.isGasPlanet && <Planet name={planet.name} />
-        );
-      })}
+      {age}
+      <button onClick={increaseAge}>Increase Age</button>
     </div>
   );
-
-
 }
 
+
+
+
+
+
+
   // Things that I've removed from the return in App Function from past lessons
+
+  // const names = ["Pedro", "Jake", "Jessica", "Mike", "Dustin", "Reudy"];
+  // const planets = [
+  //   { name: "Mars", isGasPlanet: false },
+  //   { name: "Earth", isGasPlanet: false },
+  //   { name: "Jupiter", isGasPlanet: true },
+  //   { name: "Venus", isGasPlanet: false },
+  //   { name: "Neptune", isGasPlanet: true },
+  //   { name: "Uranus", isGasPlanet: true }
+  // ];
+
+  // return (
+  //   <div className="App">
+  //     {planets.map((planet, key) => {
+  //       return (
+  //         planet.isGasPlanet && <Planet name={planet.name} />
+  //       );
+  //     })}
+  //   </div>
+  // );
+
+
+
 
 
   // const users = [
