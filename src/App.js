@@ -5,15 +5,26 @@ import Planet from './Planet.jsx'
 import { useState } from "react";
 
 function App() {
-  const [textColor, setTextColor] = useState("black");
+  const [count, setCount] = useState (0);
 
   return (
     <div className="App">
-      <button 
-      onClick={() => {
-        setTextColor(textColor === "black" ? "red" : "black")
-      }}>Show/Hide</button>
-      {<h1 style={{ color: textColor }}>HI MY NAME IS REUDY</h1>}
+      <button onClick={ () => {
+        setCount(count + 1);
+      }}
+      >Increase</button>
+
+      <button onClick={ () => {
+        setCount(count - 1);
+      }}
+      >Decrease</button>
+
+      <button onClick={ () => {
+        setCount(0);
+      }}
+      >Reset to Zero</button>
+
+      {count}
     </div>
   );
 }
