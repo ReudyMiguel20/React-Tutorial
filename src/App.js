@@ -3,24 +3,29 @@ import "./App.css";
 import { useState, useEffect } from "react";
 
 function App() {
-  const [catFact, setCatFact] = useState("");
+  const [name, setName] = useState("");
+  const [predictedAge, setPredictedAge] = useState(null);
 
-  const fetchCatFact = () => {
-    fetch("https://catfact.ninja/fact")
+  const fetchData = () => {
+    fetch("https://api.agify.io/?name=" + name)
       .then((res) => res.json())
       .then((data) => {
-        setCatFact(data.fact);
+        setPredictedAge(data);
       });
   };
 
-  useEffect(() => {
-    fetchCatFact();
-  }, []);
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
 
   return (
     <div className="App">
-      <button onClick={fetchCatFact}> Generate Cat Fact </button>
-      <p>{catFact}</p>
+      <input placeholder="Ex. Pedro..." onChange={handleNameChange} />
+      <button onClick={fetchData}> Predict Age</button>
+
+      <h1>Name: {predictedAge?.name}</h1>
+      <h1>Predicted Age: {predictedAge?.age}</h1>
+      <h1>Count: {predictedAge?.count}</h1>
     </div>
   );
 }
@@ -28,6 +33,27 @@ function App() {
 export default App;
 
 // Things that I've removed from the return in App Function from past lessons
+
+// const [catFact, setCatFact] = useState("");
+
+// const fetchCatFact = () => {
+//   fetch("https://catfact.ninja/fact")
+// 	.then((res) => res.json())
+// 	.then((data) => {
+// 	  setCatFact(data.fact);
+// 	});
+// };
+
+// useEffect(() => {
+//   fetchCatFact();
+// }, []);
+
+// return (
+//   <div className="App">
+// 	<button onClick={fetchCatFact}> Generate Cat Fact </button>
+// 	<p>{catFact}</p>
+//   </div>
+// );
 
 // const [todoList, setTodoList] = useState([]);
 // const [newTask, setNewTask] = useState("");
