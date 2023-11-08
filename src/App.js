@@ -1,72 +1,89 @@
-import './App.css';
-import Job from './Job.jsx'
-import User from './User.jsx'
-import Planet from './Planet.jsx'
-import Task from './Task.jsx'
-import { useState } from "react";
+/* eslint-disable react/jsx-key */
+import "./App.css";
+import { useState, useEffect } from "react";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
-  const [newTask, setNewTask] = useState("");
+  const [catFact, setCatFact] = useState("");
 
-  const handleChange = (event) => {
-    setNewTask(event.target.value);
+  const fetchCatFact = () => {
+    fetch("https://catfact.ninja/fact")
+      .then((res) => res.json())
+      .then((data) => {
+        setCatFact(data.fact);
+      });
   };
 
-  const addTask = () => {
-    const Task = {
-      id: (todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1),
-      taskName: newTask,
-      completed: false
-    };
-
-    setTodoList([...todoList, Task]);
-  };
-
-  const deleteTask = (id) => {
-    setTodoList(todoList.filter((task) => task.id !== id));
-  };
-
-  const completeTask = (id) => {
-    setTodoList(
-      todoList.map((task) => {
-        if (task.id === id) {
-          return { ...task, completed: true };
-        } else {
-          return task;
-        }
-      })
-    );
-  };
-
-
+  useEffect(() => {
+    fetchCatFact();
+  }, []);
 
   return (
     <div className="App">
-
-      <div className="addTask">
-        <input type="text" onChange={handleChange} />
-        <button onClick={addTask}>Add Task</button>
-      </div>
-
-      <div className="list">
-        {todoList.map((task) => {
-            return <Task id={task.id} taskName={task.taskName} completed={task.completed} deleteTask={deleteTask} completeTask={completeTask} />
-        })}
-      </div>
-
+      <button onClick={fetchCatFact}> Generate Cat Fact </button>
+      <p>{catFact}</p>
     </div>
   );
-  
 }
 
-
-
-
-
-
+export default App;
 
 // Things that I've removed from the return in App Function from past lessons
+
+// const [todoList, setTodoList] = useState([]);
+// const [newTask, setNewTask] = useState("");
+
+// const handleChange = (event) => {
+// 	setNewTask(event.target.value);
+// };
+
+// const addTask = () => {
+// 	const Task = {
+// 		id: todoList.length === 0 ? 1 : todoList[todoList.length - 1].id + 1,
+// 		taskName: newTask,
+// 		completed: false
+// 	};
+
+// 	setTodoList([...todoList, Task]);
+// };
+
+// const deleteTask = (id) => {
+// 	setTodoList(todoList.filter((task) => task.id !== id));
+// };
+
+// const completeTask = (id) => {
+// 	setTodoList(
+// 		todoList.map((task) => {
+// 			if (task.id === id) {
+// 				return { ...task, completed: true };
+// 			} else {
+// 				return task;
+// 			}
+// 		})
+// 	);
+// };
+
+// return (
+// 	<div className="App">
+// 		<div className="addTask">
+// 			<input type="text" onChange={handleChange} />
+// 			<button onClick={addTask}>Add Task</button>
+// 		</div>
+
+// 		<div className="list">
+// 			{todoList.map((task) => {
+// 				return (
+// 					<Task
+// 						id={task.id}
+// 						taskName={task.taskName}
+// 						completed={task.completed}
+// 						deleteTask={deleteTask}
+// 						completeTask={completeTask}
+// 					/>
+// 				);
+// 			})}
+// 		</div>
+// 	</div>
+// );
 
 // const names = ["Pedro", "Jake", "Jessica", "Mike", "Dustin", "Reudy"];
 // const planets = [
@@ -88,10 +105,6 @@ function App() {
 //   </div>
 // );
 
-
-
-
-
 // const users = [
 //   { name: "Pedro", age: 21},
 //   { name: "Jake", age: 25},
@@ -108,17 +121,11 @@ function App() {
 //   </div>
 // );
 
-
-
-
 // <div className="App">
 //   <Job salary={90000} position="Senior SDE" company="Amazon" />
 //   <Job salary={12000} position="Junior SDE" company="Google" />
 //   <Job salary={10000} position="Project Manager" company="Netflix" />
 // </div>
-
-
-
 
 // const age = 17;
 // const isGreen = true;
@@ -127,7 +134,6 @@ function App() {
 //   {age >= 18 ? <h1>Over age</h1> : <h1>Under Age</h1>}
 //   <h1 style={{ color: isGreen ? "green" : "red" }}> THIS HAS COLOR </h1>
 // </div>
-
 
 // const User = (props) => {
 //   return (
@@ -138,5 +144,3 @@ function App() {
 //     </div>
 //   );
 // }
-
-export default App;
