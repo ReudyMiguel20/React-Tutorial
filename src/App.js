@@ -5,16 +5,15 @@ import Planet from './Planet.jsx'
 import { useState } from "react";
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  };
+  const [showText, setShowText] = useState(true);
 
   return (
     <div className="App">
-      <input type="text" onChange={handleInputChange} />
-      {inputValue}
+      <button 
+      onClick={() => {
+        setShowText(!showText);
+      }}>Show/Hide</button>
+      {showText && <h1>HI MY NAME IS REUDY</h1>}
     </div>
   );
 }
