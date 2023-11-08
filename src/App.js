@@ -1,31 +1,26 @@
 /* eslint-disable react/jsx-key */
 import "./App.css";
+import { Home } from "./pages/Home";
+import { Menu } from "./pages/Menu";
+import { Contact } from "./pages/Contact";
+import { Error } from "./pages/Error";
+import Navbar from "./Navbar.jsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
 import { useState, useEffect } from "react";
 
 function App() {
-  const [name, setName] = useState("");
-  const [predictedAge, setPredictedAge] = useState(null);
-
-  const fetchData = () => {
-    fetch("https://api.agify.io/?name=" + name)
-      .then((res) => res.json())
-      .then((data) => {
-        setPredictedAge(data);
-      });
-  };
-
-  const handleNameChange = (event) => {
-    setName(event.target.value);
-  };
-
   return (
     <div className="App">
-      <input placeholder="Ex. Pedro..." onChange={handleNameChange} />
-      <button onClick={fetchData}> Predict Age</button>
-
-      <h1>Name: {predictedAge?.name}</h1>
-      <h1>Predicted Age: {predictedAge?.age}</h1>
-      <h1>Count: {predictedAge?.count}</h1>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<Error />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
